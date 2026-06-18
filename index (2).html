@@ -1,0 +1,1883 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Classroom Kit</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+<!-- SEATING TOOL -->
+<div id="seatingTool" class="tool-window">
+
+    <h2>🪑 Seating Arrangement Generator</h2>
+
+    <label>Student List (format: Name - Gender - Condition optional)</label>
+    <textarea id="seatStudents" placeholder="Juan Dela Cruz - M
+Maria Santos - F
+Zyrus C. - M - Poor Eyesight"></textarea>
+
+    <label>Arrangement Mode</label>
+    <select id="seatMode">
+        <option value="alpha">Alphabetical Only</option>
+        <option value="mix">Boy-Girl Alternating (Alphabetical)</option>
+        <option value="group">Grouped (Boys then Girls)</option>
+    </select>
+
+    <button onclick="generateSeating()">Generate Seating</button>
+    <button onclick="backToTools()">⬅ Back</button>
+
+    <div id="seatingOutput"></div>
+
+</div>
+
+<!-- =========================================
+     📊 GRADE CALCULATOR / CLASS RECORD SYSTEM
+     ========================================= -->
+<div id="gradeTool" class="tool-window">
+
+    <!-- TOOL TITLE -->
+    <h2>📊 Class Record System</h2>
+
+    <!-- SHORT DESCRIPTION -->
+    <p>
+        Input student scores for Written Work (WW), Performance Tasks (PT), and Quarterly Assessment (QA).
+        The system will compute final grades and results automatically.
+    </p>
+
+
+
+    <!-- =========================================
+        Grade Calcu
+         ========================================= -->
+
+<label>Paste Student Records</label>
+
+<textarea id="bulkGrades" placeholder="Example:
+Juan Dela Cruz - 85 - 90 - 88
+Maria Santos - 92 - 95 - 90
+Aya Mae Bonayon - 95 - 96 - 98"></textarea>
+
+<button onclick="importGrades()">
+    📥 Import Students
+</button>
+
+<label>Display Order</label>
+
+<select id="rankingMode">
+    <option value="alpha">Alphabetical</option>
+    <option value="rank">Highest to Lowest Grade</option>
+</select>
+
+<button onclick="sortGrades()">
+    🏆 Apply Order
+</button>
+    <!-- =========================================
+         📋 GRADE INPUT TABLE
+         ========================================= -->
+    <table id="gradeTable">
+
+    <tr>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>WW (30%)</th>
+    <th>PT (50%)</th>
+    <th>QA (20%)</th>
+    <th>Result</th>
+</tr>
+
+    <tr>
+        <td><input type="text" placeholder="Student Name"></td>
+        <td><input type="number" placeholder="WW Score"></td>
+        <td><input type="number" placeholder="PT Score"></td>
+        <td><input type="number" placeholder="QA Score"></td>
+
+        <!-- THIS IS WHERE RESULT GOES -->
+        <td class="result">---</td>
+    </tr>
+
+</table>
+
+<label>Display Order</label>
+
+
+
+    <!-- =========================================
+         🎛️ ACTION BUTTONS
+         ========================================= -->
+         
+         
+         
+    <div class="tool-buttons">
+
+
+        <!-- Compute grades -->
+        <button onclick="calculateGrades()">
+            📊 Compute Grades
+        </button>
+
+        <!-- Back to tools menu -->
+        <button onclick="backToTools()">
+            ⬅ Back
+        </button>
+
+    </div>
+
+    <!-- =========================================
+         📦 OUTPUT AREA (FOR RESULTS / FUTURE USE)
+         ========================================= -->
+    <div id="gradeOutput">
+        <!-- Final grades, ranking, or export preview will appear here -->
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     👥 GROUP MAKER
+     ========================================= -->
+<div id="groupTool" class="tool-window">
+
+    <h2>👥 Group Maker</h2>
+
+    <p>
+        Automatically divide students into balanced groups.
+    </p>
+
+    <!-- NUMBER OF GROUPS -->
+    <label>Number of Groups</label>
+    <input type="number"
+           id="groupCount"
+           min="2"
+           max="10"
+           value="5">
+
+    <!-- MASTER LIST -->
+    <label>Master List</label>
+
+    <textarea
+        id="groupStudents"
+        placeholder="One student per line
+
+Juan Dela Cruz
+Maria Santos
+Aya Mae Bonayon"></textarea>
+
+    <!-- BUTTONS -->
+    <div class="tool-buttons">
+
+        <button onclick="generateGroups()">
+            🎲 Generate Groups
+        </button>
+
+       
+
+        <button onclick="copyGroups()">
+            📋 Copy Groups
+        </button>
+        
+<button onclick="showHistory()">
+    🕘 View History
+</button>
+
+        <button onclick="backToTools()">
+            ⬅ Back
+        </button>
+
+    </div>
+
+    <!-- OUTPUT -->
+    <div id="groupOutput"></div>
+
+</div>
+
+<!-- =========================================
+     📝 INSTRUCTION TRANSLATOR TOOL
+     ========================================= -->
+<div id="instructionTool" class="tool-window">
+
+    <h2>📝 Instruction Translator</h2>
+
+    <p>
+        Convert English classroom instructions into formal grammar-based directions
+        in different Philippine languages.
+    </p>
+
+    <!-- ================================
+         📌 INSTRUCTION TYPE SELECTOR
+         ================================ -->
+    <label>Instruction Type</label>
+    <select id="instructionType">
+
+        <option value="noun">Identify Nouns</option>
+        <option value="verb">Identify Verbs</option>
+        <option value="pronoun">Identify Pronouns</option>
+        <option value="underline_noun">Underline Nouns</option>
+        <option value="circle_verb">Circle Verbs</option>
+        <option value="classify">Classify Words (Noun / Verb / Adjective)</option>
+        <option value="complete">Complete the Sentence</option>
+        <option value="rewrite">Rewrite the Sentence Correctly</option>
+        <option value="arrange">Arrange Words into a Sentence</option>
+        <option value="comprehension">Answer Reading Comprehension Questions</option>
+
+    </select>
+
+    <!-- ================================
+         🌍 LANGUAGE SELECTOR
+         ================================ -->
+    <label>Language</label>
+    <select id="instructionLanguage">
+
+        <option value="cebuano">Cebuano</option>
+        <option value="ilocano">Ilocano</option>
+        <option value="waray">Waray</option>
+        <option value="kapampangan">Kapampangan</option>
+        <option value="filipino">Filipino (Tagalog)</option>
+
+    </select>
+
+    <!-- ================================
+         🎯 OUTPUT BUTTON
+         ================================ -->
+    <div class="tool-buttons">
+
+        <button onclick="generateInstruction()">
+            🔄 Translate Instruction
+        </button>
+
+        <button onclick="backToTools()">
+            ⬅ Back
+        </button>
+
+    </div>
+
+    <!-- ================================
+         📦 OUTPUT BOX
+         ================================ -->
+    <div id="instructionOutput"></div>
+
+</div>
+
+
+<!-- =========================================
+     📊 BEHAVIOR TRACKER TOOL
+     ========================================= -->
+<div id="behaviorTool" class="tool-window">
+
+    <h2>📊 Behavior Tracker</h2>
+
+    <p>
+        Track student behavior, attendance, participation, and discipline records.
+        Add positive (+) or negative (-) points with reasons for each action.
+    </p>
+
+    <!-- =========================================
+         👥 MASTER LIST INPUT
+         ========================================= -->
+    <label>Master List (One student per line)</label>
+
+    <textarea id="behaviorStudents"
+        placeholder="Example:
+Juan Dela Cruz
+Maria Santos
+Pedro Reyes"></textarea>
+
+    <!-- =========================================
+         🎛️ ACTION BUTTONS
+         ========================================= -->
+    <div class="tool-buttons">
+
+        <button onclick="loadBehaviorStudents()">
+            📥 Load Students
+        </button>
+
+        <button onclick="resetBehavior()">
+            🔄 Reset
+        </button>
+
+        <button onclick="backToTools()">
+            ⬅ Back
+        </button>
+
+    </div>
+
+    <!-- =========================================
+         📊 STUDENT DISPLAY AREA
+         ========================================= -->
+    <div id="behaviorOutput"></div>
+
+</div>
+
+
+<!-- NAV -->
+<nav>
+    <div class="logo">Classtool Kit</div>
+    <ul>
+        <li><a href="#" onclick="showSection('home')">Home</a></li>
+        <li><a href="#" onclick="showSection('about')">About</a></li>
+        <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="hero content-section active">
+    
+<img class="hero-logo" src="https://raw.githubusercontent.com/ayambnyn/CLASSTOOL__KIT/main/logo.png" alt="ClassTool Kit Logo">
+
+    <!-- FIXED: broken h1 tag -->
+    <h1>Classtool Kit</h1>
+    
+    <p class="headline">
+    Save Time. Teach More.
+    </p>
+
+    <p class="subheadline">
+       7 Powerful Tools to Save Teachers Time!
+    </p>
+
+    <div class="tabs">
+        <button onclick="showSection('guide')">
+            <i class="fa-solid fa-book"></i> Guide
+        </button>
+
+        <button onclick="showSection('tools')">
+            <i class="fa-solid fa-toolbox"></i> Tools
+        </button>
+
+        <button onclick="showSection('helps')">
+            <i class="fa-solid fa-star"></i> How It Helps
+        </button>
+    </div>
+
+</section>
+
+<!-- GUIDE -->
+<section id="guide" class="content-section">
+    <h2>📖 Guide</h2>
+    
+    <p>
+        Class Kit is a teacher-friendly system designed to help manage classroom tasks efficiently and effectively.
+        It provides integrated digital tools that support instruction, assessment, organization, and student monitoring,
+        making classroom management faster, easier, and more structured.
+    </p>
+    
+    <p><b>Available Tools:</b></p>
+    
+    <ul>
+        <li>⏱️ Timer & Random Name Picker</li>
+        <li>📝 Worksheet Generator</li>
+        <li>🪑 Seating Arrangement Generator</li>
+        <li>📊 Grade Calculator</li>
+        <li>👥 Group Maker</li>
+        <li>📝 Instruction Translator</li>
+        <li>📊 Behavior Tracker</li>
+    </ul>
+</section>
+
+<!-- TOOLS -->
+<section id="tools" class="content-section">
+
+    <h2>🛠 Our 7 Powerful Tools</h2>
+
+    <div class="tool-grid">
+
+        <div class="card">
+            <h3>🎲 Timer & Random Name Picker</h3>
+            <p>Fair student selection with timer.</p>
+            <button onclick="openRandomPicker()">Open Tool</button>
+        </div>
+
+        <div class="card">
+            <h3>📝 Worksheet Generator</h3>
+            <p>Generate ready-to-use worksheets instantly.</p>
+            <button onclick="openWorksheetGenerator()">Open Tool</button>
+        </div>
+        
+        
+        
+        
+<div class="card">
+    <h3>🪑 Seating Arrangement Generator</h3>
+    <p>Arrange students automatically in different seating styles.</p>
+    <button onclick="openSeatingTool()">Open Tool</button>
+</div>
+
+<div class="card">
+    <h3>📊 Grade Calculator</h3>
+    <p>Compute Written Works, Petformance Task, and, Quarterly Assessments grades automatically.</p>
+    <button onclick="openGradeTool()">Open Tool</button>
+</div>
+
+       <div class="card">
+    <h3>👥 Group Maker</h3>
+    <p>Create balanced student groups automatically and shuffle members instantly.</p>
+    <button onclick="openGroupTool()">Open Tool</button>
+</div>
+
+     <div class="card">
+    <h3>📝 Instruction Translator</h3>
+    <p>
+        Convert English classroom instructions into clear, formal grammar-based directions
+        in different Philippine languages (Cebuano, Ilocano, Waray, Kapampangan, and Filipino).
+    </p>
+    <button onclick="openInstructionTool()">
+        Open Tool
+    </button>
+</div>
+
+       <div class="card">
+    <h3>📊 Behavior Tracker</h3>
+    <p>
+        Track student behavior, attendance, participation, and discipline records using positive and negative points.
+        Each action includes a reason for proper classroom monitoring and reference.
+    </p>
+    <button onclick="openBehaviorTool()">
+        Open Tool
+    </button>
+</div>
+
+    </div>
+
+</section>
+
+<!-- HOW IT HELPS -->
+<section id="helps" class="content-section">
+
+    <h2>⭐ How It Helps</h2>
+
+    <ul>
+        <li>Reduces teacher workload</li>
+        <li>Saves preparation time</li>
+        <li>Improves classroom management</li>
+        <li>All tools in one place</li>
+    </ul>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="content-section">
+
+<h2>
+    <i class="fa-solid fa-circle-info"></i>
+    About Classroom Kit
+</h2>
+    <p>
+        A teacher-centered platform designed to simplify classroom management and reduce workload.
+    </p>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="content-section">
+
+    <h2>
+        <i class="fa-solid fa-address-card"></i>
+        Contact Information
+    </h2>
+
+    <div class="contact-card">
+
+        <p>
+            <strong>
+                <i class="fa-solid fa-user"></i>
+                Developer / Creator
+            </strong>
+        </p>
+
+        <p>
+            Bonayon, Aya Mae
+        </p>
+                <p>
+            Bongola, Rhemedy Lorraine 
+        </p>
+        <p>
+            Deyto, Julie
+        </p>
+         <p>
+            Gomez, Ellen Grace
+        </p>
+            <p>
+            Jallorina, Zyrus Joseph 
+        </p>
+        
+        
+
+        <p>
+            <strong>
+                <i class="fa-solid fa-envelope"></i>
+                Email
+            </strong>
+        </p>
+
+        <p>
+            classtoolkit@gmail.com
+        </p>
+
+        <p>
+            <strong>
+                <i class="fa-solid fa-phone"></i>
+                Phone Number
+            </strong>
+        </p>
+
+        <p>
+            09924197994
+        </p>
+
+    </div>
+
+</section>
+
+<!-- TOOL SCREEN (Random Picker App) -->
+<div id="randomPickerTool" class="tool-window">
+    
+    <h2>🎲 Random Name Picker</h2>
+    
+    <label>Paste Student Names</label>
+    <textarea id="studentList" placeholder="One name per line"></textarea>
+    
+    <label>Timer</label>
+    <input type="number" id="timerInput" value="30">
+    
+    <div class="tool-buttons">
+        <button onclick="pickStudent()">Pick Student</button>
+        <button onclick="startTimer()">Start Timer</button>
+        <button onclick="resetPicker()">Reset</button>
+        <button onclick="backToTools()">⬅ Back</button>
+    </div>
+    
+    <div class="result-box">
+        <h3 id="selectedStudent">No student selected</h3>
+        <h2 id="countdown">00</h2>
+    </div>
+</div>  <!-- THIS MUST CLOSE randomPickerTool -->
+
+<!-- TOOL SCREEN (Worksheet Generator) -->
+<div id="worksheetTool" class="tool-window">
+
+    <h2>📝 Worksheet Generator</h2>
+
+    <label>Topic</label>
+    <input type="text" id="worksheetTopic" placeholder="Example: Noun">
+
+    <label>Assessment Type</label>
+    <select id="questionType">
+        <option>Multiple Choice</option>
+        <option>Identification</option>
+        <option>True or False</option>
+    </select>
+
+    <label>Number of Items</label>
+    <input type="number" id="questionCount" value="10">
+
+    <div class="tool-buttons">
+
+        <button onclick="generateWorksheet()">
+            Generate Worksheet
+        </button>
+
+        <button onclick="backToTools()">
+            ⬅ Back
+        </button>
+
+    </div>
+    <div class="timer-box">
+    
+    <h3>⏱️ Worksheet Timer</h3>
+    
+    <label>Set Time (minutes)</label>
+    <input type="number" id="timerMinutes" min="1" value="10">
+    
+    <div class="tool-buttons">
+<button onclick="startWorksheetTimer()">▶ Start</button>
+<button onclick="pauseWorksheetTimer()">⏸ Pause</button>
+<button onclick="resetWorksheetTimer()">🔄 Reset</button>
+    </div>
+    
+    <h2 id="timerDisplay">00:00</h2>
+    
+</div>
+
+    <div id="worksheetOutput"></div>
+
+</div>
+
+
+
+<!-- SCRIPT -->
+<script>
+
+function showSection(id){
+
+    document.querySelectorAll('.content-section')
+        .forEach(sec => sec.classList.remove('active'));
+
+    document.getElementById(id).classList.add('active');
+}
+
+/* =========================================
+   RANDOM PICKER + TIMER
+========================================= */
+
+let pickerStudents = [];
+let pickerUsedStudents = [];
+let pickerCountdown;
+
+/* OPEN TOOL */
+function openRandomPicker() {
+    
+    document.querySelectorAll('.content-section')
+        .forEach(sec => sec.classList.remove('active'));
+    
+    document.querySelectorAll('.tool-window')
+        .forEach(tool => tool.classList.remove('active'));
+    
+    document.getElementById("randomPickerTool")
+        .classList.add("active");
+}
+
+/* BACK */
+function backToTools() {
+    
+    document.querySelectorAll('.tool-window')
+        .forEach(tool => tool.classList.remove('active'));
+    
+    document.querySelectorAll('.content-section')
+        .forEach(sec => sec.classList.remove('active'));
+    
+    document.getElementById("tools")
+        .classList.add("active");
+}
+
+/* TIMER */
+function startTimer() {
+    
+    let input = document.getElementById("timerInput");
+    let display = document.getElementById("countdown");
+    
+    if (!input || !display) return;
+    
+    let time = parseInt(input.value);
+    
+    if (isNaN(time) || time <= 0) {
+        alert("Enter valid minutes.");
+        return;
+    }
+    
+    time = time * 60;
+    
+    clearInterval(pickerCountdown);
+    
+    pickerCountdown = setInterval(() => {
+        
+        let minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+        
+        display.innerText =
+            String(minutes).padStart(2, "0") +
+            ":" +
+            String(seconds).padStart(2, "0");
+        
+        time--;
+        
+        if (time < 0) {
+            
+            clearInterval(pickerCountdown);
+            
+            display.innerText = "00:00";
+            
+            alert("⏰ Time's up!");
+        }
+        
+    }, 1000);
+}
+
+/* PICK STUDENT */
+function pickStudent() {
+    
+    let input = document.getElementById("studentList");
+    let output = document.getElementById("selectedStudent");
+    
+    if (!input || !output) return;
+    
+    pickerStudents = input.value
+        .split("\n")
+        .map(name => name.trim())
+        .filter(name => name !== "");
+    
+    if (pickerStudents.length === 0) {
+        alert("Please enter students.");
+        return;
+    }
+    
+    let available = pickerStudents.filter(
+        student => !pickerUsedStudents.includes(student)
+    );
+    
+    if (available.length === 0) {
+        alert("All students picked!");
+        return;
+    }
+    
+    let selected =
+        available[Math.floor(Math.random() * available.length)];
+    
+    pickerUsedStudents.push(selected);
+    
+    output.innerText = selected;
+}
+
+/* RESET */
+function resetPicker() {
+    
+    pickerUsedStudents = [];
+    
+    clearInterval(pickerCountdown);
+    
+    document.getElementById("selectedStudent").innerText =
+        "No student selected";
+    
+    document.getElementById("countdown").innerText =
+        "00:00";
+}
+
+
+/* WORKSHEET */
+function openWorksheetGenerator() {
+
+    document.querySelectorAll('.content-section')
+        .forEach(sec => sec.classList.remove('active'));
+
+    document.querySelectorAll('.tool-window')
+        .forEach(tool => tool.classList.remove('active'));
+
+    setTimeout(() => {
+        document.getElementById("worksheetTool").classList.add("active");
+    }, 0);
+}
+
+
+function generateWorksheet() {
+
+    const topic = document.getElementById("worksheetTopic").value.trim().toLowerCase();
+    const type = document.getElementById("questionType").value;
+    const count = parseInt(document.getElementById("questionCount").value);
+    const output = document.getElementById("worksheetOutput");
+
+    if (!topic || isNaN(count) || count <= 0) {
+        alert("Please enter valid inputs!");
+        return;
+    }
+
+
+
+    // =============================
+    // MAIN BANK (MCQ ONLY)
+    // =============================
+    const bank = {
+        noun: {
+            mcq: [
+                ["Which of the following is a noun?", ["Run", "Table", "Quickly", "Beautiful"], "B"],
+                ["Which word is a person/place/thing?", ["Jump", "School", "Fast", "Blue"], "B"],
+                ["Identify the noun:", ["Happy", "Chair", "Run", "Slowly"], "B"]
+            ]
+        },
+
+        pronoun: {
+            mcq: [
+                ["Which is a pronoun?", ["Dog", "He", "Table", "Run"], "B"],
+                ["Which replaces a noun?", ["Verb", "Pronoun", "Adjective", "Adverb"], "B"]
+            ]
+        },
+
+        verb: {
+            mcq: [
+                ["Which is a verb?", ["Run", "Table", "Blue", "Chair"], "A"],
+                ["Which shows action?", ["Eat", "Dog", "Book", "School"], "A"]
+            ]
+        }
+    };
+
+    let questions = [];
+    let answers = [];
+
+    let data = bank[topic];
+
+    if (!data && type === "Multiple Choice") {
+        output.innerHTML = `<p>No MCQ bank for: ${topic}</p>`;
+        return;
+    }
+
+    // =============================
+    // MULTIPLE CHOICE (UNCHANGED)
+    // =============================
+    if (type === "Multiple Choice") {
+
+        for (let i = 0; i < count; i++) {
+
+            let q = data.mcq[i % data.mcq.length];
+
+            questions.push(
+                `Question ${i + 1}: ${q[0]}<br>
+                A. ${q[1][0]}<br>
+                B. ${q[1][1]}<br>
+                C. ${q[1][2]}<br>
+                D. ${q[1][3]}`
+            );
+
+            answers.push(q[2]);
+        }
+    }
+
+    // =============================
+    // IDENTIFICATION (FIXED)
+    // =============================
+    else if (type === "Identification") {
+
+        const idBank = {
+            noun: [
+                { q: "What is a noun?", a: "A noun is a word that names a person, place, thing, or idea." },
+                { q: "Give an example of a noun.", a: "Dog, school, Manila." },
+                { q: "Define noun.", a: "A naming word used in grammar." },
+                { q: "Why are nouns important?", a: "They identify people, places, things, and ideas." },
+                { q: "What does a noun represent?", a: "It represents naming words in a sentence." }
+            ],
+
+            verb: [
+                { q: "What is a verb?", a: "A verb shows action or state of being." },
+                { q: "Give an example of a verb.", a: "Run, jump, eat." },
+                { q: "Define verb.", a: "It expresses action or being." },
+                { q: "Why are verbs important?", a: "They show actions in sentences." },
+                { q: "What does a verb represent?", a: "Action or state of being." }
+            ],
+
+            pronoun: [
+                { q: "What is a pronoun?", a: "A word that replaces a noun." },
+                { q: "Give an example of a pronoun.", a: "He, she, they." },
+                { q: "Define pronoun.", a: "It replaces nouns." },
+                { q: "Why are pronouns important?", a: "They avoid repetition." },
+                { q: "What does a pronoun represent?", a: "It replaces a noun in a sentence." }
+            ]
+        };
+
+        let list = idBank[topic];
+
+        if (!list) {
+            output.innerHTML = `<p style="color:red">No identification questions for "${topic}"</p>`;
+            return;
+        }
+
+        for (let i = 0; i < count; i++) {
+            let item = list[i % list.length];
+            questions.push(`Question ${i + 1}: ${item.q}`);
+            answers.push(item.a);
+        }
+    }
+
+    // =============================
+    // TRUE OR FALSE (FIXED)
+    // =============================
+    else if (type === "True or False") {
+
+        const tfBank = {
+            noun: [
+                ["A noun names a person, place, thing, or idea.", "True"],
+                ["Run is a noun.", "False"],
+                ["School is a noun.", "True"],
+                ["Nouns are naming words.", "True"],
+                ["Manila is a noun.", "True"]
+            ],
+
+            verb: [
+                ["Run is a verb.", "True"],
+                ["Jump is a noun.", "False"],
+                ["Verbs show action.", "True"],
+                ["Walked is past tense.", "True"],
+                ["Verbs name things.", "False"]
+            ],
+
+            pronoun: [
+                ["He is a pronoun.", "True"],
+                ["Dog is a pronoun.", "False"],
+                ["They is a pronoun.", "True"],
+                ["Pronouns replace nouns.", "True"],
+                ["She is a verb.", "False"]
+            ]
+        };
+
+        let list = tfBank[topic];
+
+        if (!list) {
+            output.innerHTML = `<p style="color:red">No T/F questions for "${topic}"</p>`;
+            return;
+        }
+
+        for (let i = 0; i < count; i++) {
+            let item = list[i % list.length];
+            questions.push(`Question ${i + 1}: ${item[0]}`);
+            answers.push(item[1]);
+        }
+    }
+
+    // =============================
+    // OUTPUT
+    // =============================
+    let html = `<h2>📝 Generated Worksheet</h2><ol>`;
+
+    questions.forEach(q => html += `<li>${q}</li>`);
+
+    html += `</ol><hr><h3>🔑 Answer Key</h3><ol>`;
+
+    answers.forEach(a => html += `<li>${a}</li>`);
+
+    html += `</ol>`;
+
+    output.innerHTML = html;
+}
+
+// =========================================
+// WORKSHEET TIMER (FIXED - NO CONFLICT)
+// =========================================
+
+let worksheetTimer;
+let worksheetSeconds = 0;
+let worksheetRunning = false;
+
+function startWorksheetTimer() {
+
+    if (worksheetRunning) return;
+
+    let minutes = parseInt(document.getElementById("timerMinutes").value) || 0;
+
+    // initialize only once
+    if (worksheetSeconds === 0) {
+        worksheetSeconds = minutes * 60;
+    }
+
+    worksheetRunning = true;
+
+    worksheetTimer = setInterval(() => {
+
+        if (worksheetSeconds <= 0) {
+            clearInterval(worksheetTimer);
+            worksheetRunning = false;
+            alert("⏰ Worksheet time is up!");
+            return;
+        }
+
+        worksheetSeconds--;
+
+        let min = Math.floor(worksheetSeconds / 60);
+        let sec = worksheetSeconds % 60;
+
+        document.getElementById("timerDisplay").innerText =
+            String(min).padStart(2, "0") + ":" +
+            String(sec).padStart(2, "0");
+
+    }, 1000);
+}
+
+function pauseWorksheetTimer() {
+    clearInterval(worksheetTimer);
+    worksheetRunning = false;
+}
+
+function resetWorksheetTimer() {
+    clearInterval(worksheetTimer);
+    worksheetRunning = false;
+    worksheetSeconds = 0;
+    document.getElementById("timerDisplay").innerText = "00:00";
+}
+
+
+
+
+
+function openSeatingTool(){
+
+    // hide all main sections
+    document.querySelectorAll('.content-section')
+        .forEach(sec => sec.classList.remove('active'));
+
+    // close other tools
+    document.querySelectorAll('.tool-window')
+        .forEach(tool => tool.classList.remove('active'));
+
+    // open seating tool
+    const tool = document.getElementById("seatingTool");
+
+    if (tool) {
+        tool.classList.add("active");
+    } else {
+        alert("Seating tool not found");
+    }
+}
+
+
+function backToTools(){
+
+    // close all tools
+    document.querySelectorAll('.tool-window')
+        .forEach(tool => tool.classList.remove('active'));
+
+    // go back to tools section
+    document.querySelectorAll('.content-section')
+        .forEach(sec => sec.classList.remove('active'));
+
+    const tools = document.getElementById("tools");
+
+    if (tools) {
+        tools.classList.add("active");
+    }
+}
+
+
+function generateSeating() {
+
+    let raw = document.getElementById("seatStudents").value.trim();
+    let mode = document.getElementById("seatMode").value;
+    let output = document.getElementById("seatingOutput");
+
+    if (!raw) {
+        alert("Please enter students");
+        return;
+    }
+
+    // =========================
+    // 1. PARSE INPUT
+    // =========================
+    let students = raw.split("\n")
+        .map(line => {
+            let parts = line.split("-").map(p => p.trim());
+
+            return {
+                name: parts[0] || "",
+                gender: (parts[1] || "").toUpperCase(),
+                condition: (parts[2] || "").toLowerCase()
+            };
+        })
+        .filter(s => s.name !== "");
+
+    // =========================
+    // 2. SPLIT PE / NORMAL FIRST
+    // =========================
+    let pe = students.filter(s =>
+        (s.condition || "").toUpperCase().includes("PE") ||
+        (s.condition || "").toUpperCase().includes("POOR") ||
+        (s.condition || "").toUpperCase().includes("EYE")
+    );
+
+    let normal = students.filter(s => !pe.includes(s));
+
+    // =========================
+    // 3. SORT FUNCTION (REUSED)
+    // =========================
+    function applyMode(arr) {
+
+        if (mode === "alpha") {
+            return arr.sort((a, b) => a.name.localeCompare(b.name));
+        }
+
+        if (mode === "mix") {
+
+            let boys = arr.filter(s => s.gender === "M");
+            let girls = arr.filter(s => s.gender === "F");
+
+            boys.sort((a, b) => a.name.localeCompare(b.name));
+            girls.sort((a, b) => a.name.localeCompare(b.name));
+
+            let mixed = [];
+            let i = 0;
+
+            while (i < boys.length || i < girls.length) {
+                if (boys[i]) mixed.push(boys[i]);
+                if (girls[i]) mixed.push(girls[i]);
+                i++;
+            }
+
+            return mixed;
+        }
+
+        if (mode === "group") {
+
+            let girls = arr.filter(s => s.gender === "F");
+            let boys = arr.filter(s => s.gender === "M");
+
+            girls.sort((a, b) => a.name.localeCompare(b.name));
+            boys.sort((a, b) => a.name.localeCompare(b.name));
+
+            return [...girls, ...boys];
+        }
+
+        return arr;
+    }
+
+    // =========================
+    // 4. APPLY MODE
+    // =========================
+    pe = applyMode(pe);
+    normal = applyMode(normal);
+
+    // =========================
+    // 5. MERGE (PE ALWAYS FRONT)
+    // =========================
+    let list = [...pe, ...normal];
+
+    // =========================
+    // 6. CLASSROOM GRID (5 x 10)
+    // =========================
+    let seatsPerRow = 10;
+    let rows = 5;
+
+    let html = "<h2>Seating Arrangement</h2>";
+    let index = 0;
+
+    for (let r = 0; r < rows; r++) {
+
+        html += `<div style="margin-bottom:10px;"><b>Row ${r + 1}</b><div style="display:flex;gap:8px;">`;
+
+        for (let c = 0; c < seatsPerRow; c++) {
+
+            if (index < list.length) {
+
+                let s = list[index];
+
+                html += `
+                    <div style="
+                        border:1px solid #ccc;
+                        padding:8px;
+                        min-width:90px;
+                        text-align:center;
+                        font-size:12px;
+                        border-radius:6px;
+                        background:${pe.includes(s) ? "#ffe6e6" : "white"};
+                    ">
+                        ${s.name}<br>
+                        <small>${s.gender}${s.condition ? "<br>" + s.condition : ""}</small>
+                    </div>
+                `;
+
+                index++;
+
+            } else {
+                html += `<div style="min-width:90px;"></div>`;
+            }
+        }
+
+        html += `</div></div>`;
+    }
+
+    output.innerHTML = html;
+}
+
+
+
+
+function openGradeTool() {
+
+    document.querySelectorAll('.tool-window')
+        .forEach(t => t.classList.remove('active'));
+
+    document.getElementById("gradeTool").classList.add("active");
+}
+
+/* ================================
+   📊 COMPUTE GRADES
+   ================================ */
+   
+function calculateGrades() {
+
+    const table = document.getElementById("gradeTable");
+    const rows = table.querySelectorAll("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+
+        const inputs = rows[i].querySelectorAll("input");
+
+        // skip broken rows safely
+        if (inputs.length < 4) continue;
+
+        const ww = parseFloat(inputs[1].value) || 0;
+        const pt = parseFloat(inputs[2].value) || 0;
+        const qa = parseFloat(inputs[3].value) || 0;
+
+        const finalGrade = (ww * 0.30) + (pt * 0.50) + (qa * 0.20);
+
+        let remark =
+            finalGrade >= 90 ? "Outstanding" :
+            finalGrade >= 85 ? "Very Satisfactory" :
+            finalGrade >= 80 ? "Satisfactory" :
+            finalGrade >= 75 ? "Passed" :
+            "Failed";
+
+        // IMPORTANT FIX: get correct result cell
+        const resultCell = rows[i].querySelector(".result");
+
+        if (resultCell) {
+            resultCell.textContent = finalGrade.toFixed(2) + " (" + remark + ")";
+        }
+    }
+}
+
+/* ================================
+   📥 IMPORT STUDENTS
+   ================================ */
+
+function importGrades() {
+
+    const data = document.getElementById("bulkGrades").value.trim();
+
+    if (!data) {
+        alert("Please paste student records.");
+        return;
+    }
+
+    const table = document.getElementById("gradeTable");
+
+    // Remove old student rows but keep header
+    table.innerHTML = `
+        <tr>
+            <th>Name</th>
+            <th>WW (30%)</th>
+            <th>PT (50%)</th>
+            <th>QA (20%)</th>
+            <th>Result</th>
+        </tr>
+    `;
+
+    const lines = data.split("\n");
+
+    // Limit to 50 students
+    const maxStudents = Math.min(lines.length, 50);
+
+    for (let i = 0; i < maxStudents; i++) {
+
+        const parts = lines[i].split("-").map(x => x.trim());
+
+        if (parts.length < 4) continue;
+
+        const name = parts[0];
+        const ww = parts[1];
+        const pt = parts[2];
+        const qa = parts[3];
+
+        table.innerHTML += `
+            <tr>
+                <td><input type="text" value="${name}"></td>
+                <td><input type="number" value="${ww}"></td>
+                <td><input type="number" value="${pt}"></td>
+                <td><input type="number" value="${qa}"></td>
+                <td class="result">---</td>
+            </tr>
+        `;
+    }
+
+    alert(maxStudents + " students imported successfully.");
+}
+
+function sortGrades() {
+
+    const mode = document.getElementById("rankingMode").value;
+    const table = document.getElementById("gradeTable");
+
+    let rows = Array.from(table.querySelectorAll("tr")).slice(1);
+
+    rows.sort((a, b) => {
+
+        const nameA = a.querySelectorAll("input")[0].value.trim();
+        const nameB = b.querySelectorAll("input")[0].value.trim();
+
+        if (mode === "alpha") {
+            return nameA.localeCompare(nameB);
+        }
+
+        const wwA = parseFloat(a.querySelectorAll("input")[1].value) || 0;
+        const ptA = parseFloat(a.querySelectorAll("input")[2].value) || 0;
+        const qaA = parseFloat(a.querySelectorAll("input")[3].value) || 0;
+
+        const wwB = parseFloat(b.querySelectorAll("input")[1].value) || 0;
+        const ptB = parseFloat(b.querySelectorAll("input")[2].value) || 0;
+        const qaB = parseFloat(b.querySelectorAll("input")[3].value) || 0;
+
+        const gradeA = (wwA * 0.30) + (ptA * 0.50) + (qaA * 0.20);
+        const gradeB = (wwB * 0.30) + (ptB * 0.50) + (qaB * 0.20);
+
+        return gradeB - gradeA;
+    });
+
+    rows.forEach(row => table.appendChild(row));
+}
+
+
+
+function openGroupTool(){
+
+    document.querySelectorAll('.content-section')
+        .forEach(sec => sec.classList.remove('active'));
+
+    document.querySelectorAll('.tool-window')
+        .forEach(tool => tool.classList.remove('active'));
+
+    document.getElementById("groupTool")
+        .classList.add("active");
+}
+
+/* ================================
+   👥 GROUP MAKER - FIXED VERSION
+   ================================ */
+
+let savedStudents = [];
+let groupHistory = [];
+/* ================================
+   🎲 GENERATE GROUPS
+   ================================ */
+
+function generateGroups() {
+    
+    let raw = document.getElementById("groupStudents").value;
+    let groupCount = parseInt(document.getElementById("groupCount").value);
+    let output = document.getElementById("groupOutput");
+    
+    let students = raw.split("\n")
+        .map(name => name.trim())
+        .filter(name => name !== "");
+    
+    if (students.length === 0) {
+        alert("Please enter students.");
+        return;
+    }
+    
+    // SAVE for shuffle
+    savedStudents = [...students];
+    
+    // SHUFFLE
+    for (let i = students.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [students[i], students[j]] = [students[j], students[i]];
+    }
+    
+    // CREATE GROUPS
+    let groups = [];
+    for (let i = 0; i < groupCount; i++) {
+        groups.push([]);
+    }
+    
+    // DISTRIBUTE
+    students.forEach((student, index) => {
+        groups[index % groupCount].push(student);
+    });
+    
+    // SAVE CURRENT GROUP SET TO HISTORY
+groupHistory.push(JSON.parse(JSON.stringify(groups)));
+    
+    // OUTPUT (CENTERED FIXED)
+    let html = `
+        <div style="max-width:900px;margin:20px auto;">
+        <h2>Generated Groups</h2>
+    `;
+    
+    groups.forEach((group, index) => {
+        
+        html += `
+        <div style="
+            margin-bottom:15px;
+            padding:12px;
+            
+        ">
+            <h3>👥 Group ${index + 1}</h3>
+            <ol>
+        `;
+        
+        group.forEach(student => {
+            html += `<li>${student}</li>`;
+        });
+        
+        html += `
+            </ol>
+        </div>
+        `;
+    });
+    
+    html += `</div>`;
+    
+    output.innerHTML = html;
+}
+
+
+
+/* ================================
+   📋 COPY GROUPS (FIXED)
+   ================================ */
+
+function copyGroups() {
+    
+    let output = document.getElementById("groupOutput");
+    
+    if (!output || output.innerText.trim() === "") {
+        alert("Nothing to copy yet.");
+        return;
+    }
+    
+    navigator.clipboard.writeText(output.innerText)
+        .then(() => alert("Groups copied!"))
+        .catch(() => alert("Copy failed"));
+}
+
+function showHistory() {
+
+    let output = document.getElementById("groupOutput");
+
+    if (groupHistory.length === 0) {
+        alert("No history yet.");
+        return;
+    }
+
+    let html = "<h2>🕘 Group History</h2>";
+
+    groupHistory.forEach((groups, setIndex) => {
+
+        html += `
+    <div style="margin-bottom:20px;padding:10px;border-radius:10px;">
+        <h3>📦 Set ${setIndex + 1}</h3>
+    `;
+
+        groups.forEach((group, groupIndex) => {
+
+            html += `<b>Group ${groupIndex + 1}</b><ul>`;
+
+            group.forEach(student => {
+                html += `<li>${student}</li>`;
+            });
+
+            html += `</ul>`;
+        });
+
+        html += `</div>`;
+    });
+
+    output.innerHTML = html;
+}
+
+function openInstructionTool() {
+
+    // Hide all main sections
+    document.querySelectorAll('.content-section')
+        .forEach(sec => sec.classList.remove('active'));
+
+    // Close all tools
+    document.querySelectorAll('.tool-window')
+        .forEach(tool => tool.classList.remove('active'));
+
+    // Open Instruction Translator tool
+    const tool = document.getElementById("instructionTool");
+
+    if (tool) {
+        tool.classList.add("active");
+    } else {
+        alert("Instruction Translator tool not found");
+    }
+}
+
+function generateInstruction() {
+
+    let type = document.getElementById("instructionType").value;
+    let lang = document.getElementById("instructionLanguage").value;
+    let output = document.getElementById("instructionOutput");
+
+    // ================================
+    // 📚 FIXED INSTRUCTION BANK
+    // ================================
+    const instructions = {
+
+        noun: "Identify the nouns in the sentence.",
+        verb: "Identify the verbs in the sentence.",
+        pronoun: "Identify the pronouns in the sentence.",
+        underline_noun: "Underline the nouns in the sentence.",
+        circle_verb: "Circle the verbs in the sentence.",
+        classify: "Classify the words as noun, verb, or adjective.",
+        complete: "Complete the sentence with the correct word.",
+        rewrite: "Rewrite the sentence using correct grammar.",
+        arrange: "Arrange the words to form a correct sentence.",
+        comprehension: "Answer the reading comprehension questions."
+    };
+
+    // ================================
+    // 🌍 FIXED TRANSLATION BANK
+    // ================================
+    const translations = {
+
+        cebuano: {
+            noun: "Ipakita ang mga nombre sa pangungusap.",
+            verb: "Ipakita ang mga berbo sa pangungusap.",
+            pronoun: "Ipakita ang mga pronoun sa pangungusap.",
+            underline_noun: "Salungguhita ang mga nombre sa pangungusap.",
+            circle_verb: "Bilogan ang mga berbo sa pangungusap.",
+            classify: "Iklasipika ang mga pulong isip nombre, berbo, o adjective.",
+            complete: "Kumpletuhon ang pangungusap gamit ang sakto nga pulong.",
+            rewrite: "Isulat pag-usab ang pangungusap gamit ang sakto nga grammar.",
+            arrange: "Ayuhon ang mga pulong aron makahimo og sakto nga pangungusap.",
+            comprehension: "Tubaga ang mga pangutana sa pagbasa."
+        },
+
+        ilocano: {
+            noun: "Itudo dagiti ngaran iti sentensia.",
+            verb: "Itudo dagiti verbo iti sentensia.",
+            pronoun: "Itudo dagiti pronoun iti sentensia.",
+            underline_noun: "Salungguhitan dagiti ngaran iti sentensia.",
+            circle_verb: "Bilogan dagiti verbo iti sentensia.",
+            classify: "Iklasipika dagiti balikas kas ngaran, verbo, wenno adjective.",
+            complete: "Kumpletoen ti sentensia babaen ti umiso a balikas.",
+            rewrite: "Isurat manen ti sentensia a nasayaat ti grammar.",
+            arrange: "Aylaen dagiti balikas tapno makabuo ti umiso a sentensia.",
+            comprehension: "Sungbatan dagiti saludsod iti panagbasa."
+        },
+
+        waray: {
+            noun: "Tigamni an mga ngaran ha sentensya.",
+            verb: "Tigamni an mga berbo ha sentensya.",
+            pronoun: "Tigamni an mga pronoun ha sentensya.",
+            underline_noun: "Salungguhita an mga ngaran ha sentensya.",
+            circle_verb: "Bilugi an mga berbo ha sentensya.",
+            classify: "Iklasipika an mga pulong komo ngaran, berbo, o adjective.",
+            complete: "Kumpletoha an sentensya gamit an husto nga pulong.",
+            rewrite: "Isurat utro an sentensya gamit an husto nga grammar.",
+            arrange: "Ayaw-a an mga pulong basi makahimo hin husto nga sentensya.",
+            comprehension: "Batona an mga pakiana ha pagbasa."
+        },
+
+        kapampangan: {
+            noun: "Tuknang la reng ngaran king pangungusap.",
+            verb: "Tuknang la reng berbo king pangungusap.",
+            pronoun: "Tuknang la reng pronoun king pangungusap.",
+            underline_noun: "Salungguhitan la reng ngaran king pangungusap.",
+            circle_verb: "Bilugan la reng berbo king pangungusap.",
+            classify: "Iklasipika la reng salita bilang ngaran, berbo, o adjective.",
+            complete: "Kumpletuan ya ing pangungusap gamit ing tamang salita.",
+            rewrite: "Isulat ning aliwa ing pangungusap gamit ing tamang grammar.",
+            arrange: "Ayusan la reng salita ban makagawa king tamang pangungusap.",
+            comprehension: "Sasagutan la reng kayabe king pamagbasa."
+        },
+
+        filipino: {
+            noun: "Tukuyin ang mga pangngalan sa pangungusap.",
+            verb: "Tukuyin ang mga pandiwa sa pangungusap.",
+            pronoun: "Tukuyin ang mga panghalip sa pangungusap.",
+            underline_noun: "Salungguhitan ang mga pangngalan sa pangungusap.",
+            circle_verb: "Bilugan ang mga pandiwa sa pangungusap.",
+            classify: "Uriin ang mga salita bilang pangngalan, pandiwa, o pang-uri.",
+            complete: "Kumpletuhin ang pangungusap gamit ang tamang salita.",
+            rewrite: "Isulat muli ang pangungusap gamit ang tamang balarila.",
+            arrange: "Ayusin ang mga salita upang makabuo ng tamang pangungusap.",
+            comprehension: "Sagutin ang mga tanong sa pagbasa."
+        }
+    };
+
+    // ================================
+    // 🧠 GET RESULT
+    // ================================
+    let instructionText = instructions[type] || "No instruction found.";
+    let translatedText = translations[lang][type] || "No translation found.";
+
+    // ================================
+    // 📦 OUTPUT (STRUCTURED FORMAT)
+    // ================================
+    let html = `
+        <div style="
+            max-width:700px;
+            margin:20px auto;
+            padding:15px;
+            border:1px solid #ccc;
+            border-radius:10px;
+            background:white;
+        ">
+
+            <h3>📝 Instruction Result</h3>
+
+            <p><b>Instruction Type:</b> ${instructionText}</p>
+            <p><b>Language:</b> ${lang.toUpperCase()}</p>
+
+            <hr>
+
+            <p><b>Translated Instruction:</b></p>
+            <p>${translatedText}</p>
+
+        </div>
+    `;
+
+    output.innerHTML = html;
+}function generateInstruction() {
+    
+    let type = document.getElementById("instructionType").value;
+    let lang = document.getElementById("instructionLanguage").value;
+    let output = document.getElementById("instructionOutput");
+    
+    // ================================
+    // 📚 FIXED INSTRUCTION BANK
+    // ================================
+    const instructions = {
+        
+        noun: "Identify the nouns in the sentence.",
+        verb: "Identify the verbs in the sentence.",
+        pronoun: "Identify the pronouns in the sentence.",
+        underline_noun: "Underline the nouns in the sentence.",
+        circle_verb: "Circle the verbs in the sentence.",
+        classify: "Classify the words as noun, verb, or adjective.",
+        complete: "Complete the sentence with the correct word.",
+        rewrite: "Rewrite the sentence using correct grammar.",
+        arrange: "Arrange the words to form a correct sentence.",
+        comprehension: "Answer the reading comprehension questions."
+    };
+    
+    // ================================
+    // 🌍 FIXED TRANSLATION BANK
+    // ================================
+    const translations = {
+        
+        cebuano: {
+            noun: "Ipakita ang mga nombre sa pangungusap.",
+            verb: "Ipakita ang mga berbo sa pangungusap.",
+            pronoun: "Ipakita ang mga pronoun sa pangungusap.",
+            underline_noun: "Salungguhita ang mga nombre sa pangungusap.",
+            circle_verb: "Bilogan ang mga berbo sa pangungusap.",
+            classify: "Iklasipika ang mga pulong isip nombre, berbo, o adjective.",
+            complete: "Kumpletuhon ang pangungusap gamit ang sakto nga pulong.",
+            rewrite: "Isulat pag-usab ang pangungusap gamit ang sakto nga grammar.",
+            arrange: "Ayuhon ang mga pulong aron makahimo og sakto nga pangungusap.",
+            comprehension: "Tubaga ang mga pangutana sa pagbasa."
+        },
+        
+        ilocano: {
+            noun: "Itudo dagiti ngaran iti sentensia.",
+            verb: "Itudo dagiti verbo iti sentensia.",
+            pronoun: "Itudo dagiti pronoun iti sentensia.",
+            underline_noun: "Salungguhitan dagiti ngaran iti sentensia.",
+            circle_verb: "Bilogan dagiti verbo iti sentensia.",
+            classify: "Iklasipika dagiti balikas kas ngaran, verbo, wenno adjective.",
+            complete: "Kumpletoen ti sentensia babaen ti umiso a balikas.",
+            rewrite: "Isurat manen ti sentensia a nasayaat ti grammar.",
+            arrange: "Aylaen dagiti balikas tapno makabuo ti umiso a sentensia.",
+            comprehension: "Sungbatan dagiti saludsod iti panagbasa."
+        },
+        
+        waray: {
+            noun: "Tigamni an mga ngaran ha sentensya.",
+            verb: "Tigamni an mga berbo ha sentensya.",
+            pronoun: "Tigamni an mga pronoun ha sentensya.",
+            underline_noun: "Salungguhita an mga ngaran ha sentensya.",
+            circle_verb: "Bilugi an mga berbo ha sentensya.",
+            classify: "Iklasipika an mga pulong komo ngaran, berbo, o adjective.",
+            complete: "Kumpletoha an sentensya gamit an husto nga pulong.",
+            rewrite: "Isurat utro an sentensya gamit an husto nga grammar.",
+            arrange: "Ayaw-a an mga pulong basi makahimo hin husto nga sentensya.",
+            comprehension: "Batona an mga pakiana ha pagbasa."
+        },
+        
+        kapampangan: {
+            noun: "Tuknang la reng ngaran king pangungusap.",
+            verb: "Tuknang la reng berbo king pangungusap.",
+            pronoun: "Tuknang la reng pronoun king pangungusap.",
+            underline_noun: "Salungguhitan la reng ngaran king pangungusap.",
+            circle_verb: "Bilugan la reng berbo king pangungusap.",
+            classify: "Iklasipika la reng salita bilang ngaran, berbo, o adjective.",
+            complete: "Kumpletuan ya ing pangungusap gamit ing tamang salita.",
+            rewrite: "Isulat ning aliwa ing pangungusap gamit ing tamang grammar.",
+            arrange: "Ayusan la reng salita ban makagawa king tamang pangungusap.",
+            comprehension: "Sasagutan la reng kayabe king pamagbasa."
+        },
+        
+        filipino: {
+            noun: "Tukuyin ang mga pangngalan sa pangungusap.",
+            verb: "Tukuyin ang mga pandiwa sa pangungusap.",
+            pronoun: "Tukuyin ang mga panghalip sa pangungusap.",
+            underline_noun: "Salungguhitan ang mga pangngalan sa pangungusap.",
+            circle_verb: "Bilugan ang mga pandiwa sa pangungusap.",
+            classify: "Uriin ang mga salita bilang pangngalan, pandiwa, o pang-uri.",
+            complete: "Kumpletuhin ang pangungusap gamit ang tamang salita.",
+            rewrite: "Isulat muli ang pangungusap gamit ang tamang balarila.",
+            arrange: "Ayusin ang mga salita upang makabuo ng tamang pangungusap.",
+            comprehension: "Sagutin ang mga tanong sa pagbasa."
+        }
+    };
+    
+    // ================================
+    // 🧠 GET RESULT
+    // ================================
+    let instructionText = instructions[type] || "No instruction found.";
+    let translatedText = translations[lang][type] || "No translation found.";
+    
+    // ================================
+    // 📦 OUTPUT (STRUCTURED FORMAT)
+    // ================================
+    let html = `
+        <div style="
+            max-width:700px;
+            margin:20px auto;
+            padding:15px;
+            border:1px solid #ccc;
+            border-radius:10px;
+            background:white;
+        ">
+
+            <h3>📝 Instruction Result</h3>
+
+            <p><b>Instruction Type:</b> ${instructionText}</p>
+            <p><b>Language:</b> ${lang.toUpperCase()}</p>
+
+            <hr>
+
+            <p><b>Translated Instruction:</b></p>
+            <p>${translatedText}</p>
+
+        </div>
+    `;
+    
+    output.innerHTML = html;
+}
+
+
+function openBehaviorTool() {
+
+    // Hide all main sections
+    document.querySelectorAll('.content-section')
+        .forEach(sec => sec.classList.remove('active'));
+
+    // Close all tools
+    document.querySelectorAll('.tool-window')
+        .forEach(tool => tool.classList.remove('active'));
+
+    // Open Behavior Tracker tool
+    const tool = document.getElementById("behaviorTool");
+
+    if (tool) {
+        tool.classList.add("active");
+    } else {
+        alert("Behavior Tracker tool not found");
+    }
+}
+
+/* =========================================
+   📊 BEHAVIOR TRACKER SYSTEM (FULL)
+   ========================================= */
+
+let behaviorData = [];
+
+/* =========================================
+   📥 LOAD STUDENTS
+   ========================================= */
+function loadBehaviorStudents() {
+
+    let raw = document.getElementById("behaviorStudents").value;
+    let output = document.getElementById("behaviorOutput");
+
+    let students = raw.split("\n")
+        .map(s => s.trim())
+        .filter(s => s !== "");
+
+    if (students.length === 0) {
+        alert("Please enter students.");
+        return;
+    }
+
+    behaviorData = []; // reset data every load
+
+    let html = `<h2>📊 Class Behavior Dashboard</h2>`;
+
+    students.forEach((name, index) => {
+
+        behaviorData[index] = {
+            name: name,
+            points: 0,
+            logs: []
+        };
+
+        html += `
+        <div class="student-card" style="
+            background:white;
+            padding:12px;
+            margin:10px 0;
+            border-radius:10px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.1);
+        ">
+
+            <h3>${name}</h3>
+
+            <p>
+                Points: <span id="points-${index}">0</span>
+            </p>
+
+            <button onclick="addPoint(${index}, 1)">➕ Positive</button>
+            <button onclick="addPoint(${index}, -1)">➖ Negative</button>
+
+            <div id="log-${index}" style="margin-top:10px;font-size:0.9rem;"></div>
+
+        </div>
+        `;
+    });
+
+    output.innerHTML = html;
+}
+
+
+/* =========================================
+   ➕ / ➖ ADD POINT SYSTEM
+   ========================================= */
+function addPoint(index, value) {
+
+    let reason = prompt("Why is this point given?");
+
+    if (!reason) return;
+
+    let time = new Date().toLocaleTimeString();
+
+    behaviorData[index].points += value;
+
+    behaviorData[index].logs.push({
+        type: value,
+        reason: reason,
+        time: time
+    });
+
+    // UPDATE POINT DISPLAY
+    document.getElementById(`points-${index}`).innerText =
+        behaviorData[index].points;
+
+    // UPDATE LOG DISPLAY
+    let logBox = document.getElementById(`log-${index}`);
+
+    let logHTML = "";
+
+    behaviorData[index].logs.slice().reverse().forEach(log => {
+
+        logHTML += `
+            <div>
+                ${log.type > 0 ? "✔" : "✖"} ${log.reason}
+                <small>(${log.time})</small>
+            </div>
+        `;
+    });
+
+    logBox.innerHTML = logHTML;
+}
+
+
+/* =========================================
+   🔄 RESET SYSTEM
+   ========================================= */
+function resetBehavior() {
+
+    if (!confirm("Reset all behavior data?")) return;
+
+    behaviorData = [];
+    document.getElementById("behaviorStudents").value = "";
+    document.getElementById("behaviorOutput").innerHTML = "";
+}
+
+</script>
+
+</>
+</html>
